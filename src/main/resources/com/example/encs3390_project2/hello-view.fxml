@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: #0B0F1A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.encs3390_project2.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <VBox spacing="10.0" style="-fx-background-color: #121A2B; -fx-border-color: #24314C; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 15;">
+        <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #F1F5FF;" text="Output" />
+        <VBox spacing="6.0">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #CBD5E1;" text="Gantt Chart:" />
+                <Label style="-fx-text-fill: #94A3B8;" text="Zoom" />
+                <Slider fx:id="zoomSlider" max="20.0" min="0.05" prefWidth="220" value="1.0" />
+                <Label fx:id="zoomValueLabel" style="-fx-text-fill: #94A3B8;" text="100%" />
+                <Button onAction="#fitGantt" style="-fx-background-color: #334155; -fx-text-fill: #F1F5FF; -fx-background-radius: 8; -fx-cursor: hand;" text="Fit to View" />
+            </HBox>
+            <ScrollPane fx:id="ganttScroll" fitToHeight="true" fitToWidth="false" hbarPolicy="AS_NEEDED" pannable="true" style="-fx-background: #0F172A; -fx-border-color: #334155; -fx-border-radius: 5; -fx-background-radius: 5;" vbarPolicy="NEVER">
+                <content>
+                    <StackPane fx:id="ganttContent" style="-fx-background-color: #0F172A;" />
+                </content>
+            </ScrollPane>
+        </VBox>
+        <VBox spacing="8.0">
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #CBD5E1;" text="Average Waiting Time:" />
+                <Label fx:id="waitingTimeLabel" style="-fx-font-size: 14px; -fx-text-fill: #F1F5FF;" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #CBD5E1;" text="Average Turnaround Time:" />
+                <Label fx:id="turnaroundTimeLabel" style="-fx-font-size: 14px; -fx-text-fill: #F1F5FF;" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #CBD5E1;" text="Detected Deadlock States:" />
+                <Label fx:id="deadlockLabel" style="-fx-font-size: 14px; -fx-text-fill: #F1F5FF;" />
+            </HBox>
+            <TableView fx:id="deadlockTable" prefHeight="160.0" style="-fx-background-color: #0F172A; -fx-border-color: #334155; -fx-border-radius: 8; -fx-background-radius: 8;">
+                <columns>
+                    <TableColumn fx:id="colDetectionTime" prefWidth="120" text="Detection Time" />
+                    <TableColumn fx:id="colDeadlocked" prefWidth="360" text="Deadlocked Processes" />
+                    <TableColumn fx:id="colVictims" prefWidth="240" text="Victims Selected" />
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
+    <GridPane hgap="10.0" style="-fx-background-color: #121A2B; -fx-border-color: #24314C; -fx-border-radius: 14; -fx-background-radius: 14; -fx-padding: 18;" vgap="10.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" prefWidth="400.0" />
+            <ColumnConstraints hgrow="NEVER" prefWidth="120.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="30.0" />
+            <RowConstraints prefHeight="50.0" />
+            <RowConstraints prefHeight="20.0" />
+        </rowConstraints>
+        <children>
+            <Label style="-fx-text-fill: #F1F5FF; -fx-font-size: 14px; -fx-font-weight: bold;" text="Input File" GridPane.columnSpan="2" />
+            <Label fx:id="choosenFileLabel" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #CBD5E1; -fx-font-size: 13px; -fx-border-color: #334155; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10 12 10 12; -fx-background-color: #0F172A;" text="No file chosen" textOverrun="ELLIPSIS" GridPane.rowIndex="1" />
+            <Button fx:id="fileChooserButton" onAction="#showFileChooser" style="-fx-background-color: #6366F1; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10 14 10 14; -fx-cursor: hand;" text="Choose File" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label style="-fx-text-fill: #94A3B8; -fx-font-size: 11px;" text="Long paths will be shortened with ..." GridPane.columnSpan="2" GridPane.rowIndex="2" />
+        </children>
+    </GridPane>
+    <Button fx:id="runProgramButton" disable="true" maxWidth="1.7976931348623157E308" onAction="#runProgram" onMouseEntered="#HoverInto" onMouseExited="#HoverOut" prefHeight="42.0" prefWidth="462.0" style="-fx-background-color: #F59E0B; -fx-text-fill: #1F2937; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 11 14 11 14; -fx-cursor: hand;" text="Start" />
+</VBox>
